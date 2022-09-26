@@ -96,15 +96,32 @@ Lo siguiente será aprender a hacer usuarios (desde el CLI de Docker) y darles l
 es necesario saberlo pero hacer las cosas bien es gratis, y tampoco es tanto esfuerzo. Esto lo hacemos porque *root* es el user por defecto que crea el server
 y tiene muchos más permisos de los que vamos a necesitar, y no queremos romper nada.  
 
+Antes de hacer los usuarios, vamos a crear BBDD con las que vamos a ir trabajando, y después nos crearemos un user con (todos) los privilegios sobre esas BBDD.  
 
+Cada BBDD la vamos a crear usando un *backup lógico*, esto es, un fichero .sql con las sentencias que crean la BD, sus tablas, y los datos de las tablas. Simplemente hay
+que ejecutar desde Workbench los ficheros .sql (estarán en el repo).  
+
+Ahora creamos un usuario para trabajar en las BBDD que hemos creado desde *root*. Para crear un usuario, vamos al CLI de Docker 
+y ejecutamos `CREATE USER 'user_name'@'host_id' IDENTIFIED BY 'password'`
+donde pondré como user_name y password *raul*, y host_id será '%' para que nos permita conectarnos desde cualquier host.  
+Si todo ha ido bien, podremos hacer una conexión desde Workbench al server con este usuario. El user creado no tiene ningún privilegio, vamos a 
+concederle todos sobre las DDBB que hemos creado antes para poder empezar a trabajar. Para ello, desde el CLI de Docker, ejecutamos 
+`GRANT ALL PRIVILEGES ON db_name.* TO 'user_name'@'host_name';`, especificando los parámetros para cada DB. El user y host siempre serán los mismos.  
+
+Con esto estamos dando al usuario poderes administrativos sobre las DDBB; no es lo ideal, a nivel de seguridad, pero para este curso nos vale.  
+
+Si todo ha ido bien, podremos ver las DDBB desde la conexión del usuario que hemos creado, y podremos ver también privilegios desde Workbench. 
+A partir de este punto, nos olvidamos de momento del usuario *root*, y vamos a trabajar siempre con el que hemos creado.
 
 
 
 ## Biblio
+
 ### Más general
 - Documentación oficial de MySQL: https://dev.mysql.com/doc/
 - MySQL Tutorial: https://www.mysqltutorial.org/
 - W3Schools Tutorial: https://www.w3schools.com/mysql/
+- Material: https://josejuansanchez.org/bd/
 
 ### Más específica
 - Instalar mysql-server en un contenedr de Docker: https://hevodata.com/learn/docker-mysql/
