@@ -127,3 +127,4 @@ A partir de este punto, nos olvidamos de momento del usuario *root*, y vamos a t
 - Instalar mysql-server en un contenedr de Docker: https://hevodata.com/learn/docker-mysql/
 - Conectar mysql workbench con el contenedor: https://stackoverflow.com/questions/33827342/how-to-connect-mysql-workbench-to-running-mysql-inside-docker
 - Admin Best Practices: http://download.nust.na/pub6/mysql/tech-resources/articles/mysql-administrator-best-practices.html
+- Bug sobre recreación de usuario: https://stackoverflow.com/questions/5555328/error-1396-hy000-operation-create-user-failed-for-jacklocalhost
